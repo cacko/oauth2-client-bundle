@@ -22,6 +22,10 @@ class GoogleProviderConfigurator implements ProviderConfiguratorInterface
                 ->defaultNull()
                 ->info('Optional value for sending access_type parameter. More detail: https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters')
             ->end()
+            ->scalarNode('prompt')
+                ->defaultNull()
+                ->info('Optional value for sending prompt parameter. More detail: https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters')
+            ->end()
             ->scalarNode('hosted_domain')
                 ->defaultNull()
                 ->info('Optional value for sending hd parameter. More detail: https://developers.google.com/identity/protocols/OpenIDConnect#hd-param')
@@ -58,6 +62,10 @@ class GoogleProviderConfigurator implements ProviderConfiguratorInterface
 
         if (!empty($config['user_fields'])) {
             $options['userFields'] = $config['user_fields'];
+        }
+
+        if (!empty($config['prompt'])) {
+            $options['prompt'] = $config['prompt'];
         }
 
         if (!empty($config['use_oidc_mode'])) {
